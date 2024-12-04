@@ -10,9 +10,8 @@ xmas(Cs, N, X) :-
     o2c(Cs, N, X, Os, ['M','A','S']).
 
 x_mas(Cs, N, X) :-
-    o2c(Cs, N, X, [(-1)-(-1),1-(-1),(-1)-1,1-1], Out),
-    member(Out, [['M','S','M','S'], ['S','M','S','M'],
-		 ['M','M','S','S'], ['S','S','M','M']]).
+    o2c(Cs, N, X, [-1-(-1),1-(-1),-1-1,1-1], Out),
+    member(Out, [['M','S','M','S'], ['S','M','S','M'], ['M','M','S','S'], ['S','S','M','M']]).
 
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []), string_chars(S,Cs0),
