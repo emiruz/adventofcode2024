@@ -5,9 +5,7 @@ safe(Xs) :-
 
 mod_then_safe(Xs) :- member(X, Xs), select(X, Xs, Ys), safe(Ys), !.
 
-acc(_{0:_,n:X}, Xs, [X|Xs]).
-
-nums(S,Xs) :- re_foldl(acc, "(?<n_I>\\d+)", S, [], Xs, []).
+nums(S,Xs) :- re_foldl([_{0:_,n:X},Xs,[X|Xs]]>>true, "(?<n_I>\\d+)", S, [], Xs, []).
 
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []),
