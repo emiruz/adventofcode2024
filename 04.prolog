@@ -14,7 +14,5 @@ x_mas(Cs, N, X) :-
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []), string_chars(S,Cs0),
     nth0(N, Cs0, '\n'), !, exclude(=('\n'), Cs0, Cs),
-    findall(X-Y, (nth0(I, Cs, 'X'), X is mod(I, N), Y is I//N), Xs),
-    aggregate_all(count, ( member(X, Xs), xmas(Cs, N, X) ), Part1),
-    findall(X-Y, (nth0(I, Cs, 'A'), X is mod(I, N), Y is I//N), Xs2),
-    aggregate_all(count, ( member(X, Xs2), x_mas(Cs, N, X) ), Part2).
+    aggregate_all(count, (nth0(I,Cs,'X'), X is mod(I,N), Y is I//N, xmas(Cs,N,X-Y)), Part1),
+    aggregate_all(count, (nth0(I,Cs,'A'), X is mod(I,N), Y is I//N, x_mas(Cs,N,X-Y)), Part2).
