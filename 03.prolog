@@ -1,5 +1,4 @@
-mul_do_acc(_{0:_,2:_,op:"mul",x:X,y:Y}, A-V0-V1, A-V2-V3) :-
-    V2 is V0+(X*Y), V3 is V1+A*(X*Y).
+mul_do_acc(_{0:_,2:_,op:"mul",x:X,y:Y}, A-V0-V1, A-V2-V3) :- V2 is V0+(X*Y), V3 is V1+A*(X*Y).
 mul_do_acc(_{0:_, op:"do"}, _-V0-V1, 1-V0-V1).
 mul_do_acc(_{0:_, op:"don't"}, _-V0-V1, 0-V0-V1).
 
