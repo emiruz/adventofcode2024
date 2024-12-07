@@ -10,14 +10,14 @@ ref(Dir, Off, Turn) :-
 
 walk(Pos-Dir, Cols, Rows, Os, Ps, Final) :-
     ref(Dir, Off, Next),
-    (   coo(Cols, Rows, Pos, Off, NewPos),
-        get_assoc(NewPos, Os, 0), !
-    ->  walk(Pos-Next, Cols, Rows, Os, Ps, Final)
-    ;   coo(Cols, Rows, Pos, Off, NewPos), !,
-        \+ get_assoc(NewPos-Dir, Ps, 0),
-        put_assoc(NewPos-Dir, Ps, 0, Ps1),
-        walk(NewPos-Dir, Cols, Rows, Os, Ps1, Final)
-    ;   assoc_to_keys(Ps, Vs0), pairs_keys(Vs0, Vs), sort(Vs, Final)).
+    (  coo(Cols, Rows, Pos, Off, NewPos),
+       get_assoc(NewPos, Os, 0), !
+    -> walk(Pos-Next, Cols, Rows, Os, Ps, Final)
+    ;  coo(Cols, Rows, Pos, Off, NewPos), !,
+       \+ get_assoc(NewPos-Dir, Ps, 0),
+       put_assoc(NewPos-Dir, Ps, 0, Ps1),
+       walk(NewPos-Dir, Cols, Rows, Os, Ps1, Final)
+    ;  assoc_to_keys(Ps, Vs0), pairs_keys(Vs0, Vs), sort(Vs, Final)).
 
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []), string_chars(S, Cs0),
