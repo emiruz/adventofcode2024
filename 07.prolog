@@ -14,8 +14,7 @@ check(S, Total1-Total2) :-
 check(_,0-0).
 
 solve(In, Part1, Part2) :-
-    read_file_to_string(In, S, []),
-    split_string(S, "\n", "", Ss),
+    read_file_to_string(In, S, []), split_string(S, "\n", "", Ss),
     maplist(check, Ss, Totals),
     aggregate_all(sum(A), member(A-B, Totals), Part1),
     aggregate_all(sum(max(A,B)), member(A-B, Totals), Part2).
