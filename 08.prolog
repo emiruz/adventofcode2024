@@ -17,5 +17,5 @@ solve(In, P1, P2) :-
 	  label([Idx]),
 	  (min(D1,D2) #= abs(D1-D2), Out=[Idx]-[Idx]; Out=[Idx]-[])
 	), Ids),
-    pairs_keys(Ids, Ks), pairs_values(Ids, Vs),
+    pairs_keys_values(Ids, Ks, Vs),
     maplist([L0,Len]>>(flatten(L0,L),sort(L,Srt),length(Srt,Len)), [Vs,Ks], [P1,P2]).
