@@ -1,6 +1,6 @@
 :- use_module(library(clpfd)).
 
-:- table value(_,_,sum).
+:- table value(_,_,sum), coo/3.
 
 coo(Idx0, Idx, X1-Y1) :-
     d(cols, Cols), d(rows, Rows),
