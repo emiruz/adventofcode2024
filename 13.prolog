@@ -13,5 +13,5 @@ take([], _, Acc, Acc).
 
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []),
-    re_foldl([_{0:_,x:N},V0,[N|V0]]>>true, "(?<x_I>\\d+)", S, [], Ns, []),
+    re_foldl([_{0:N},V0,[N|V0]]>>true, "\\d+"/t, S, [], Ns, []),
     take(Ns, 0, 0, Part1), take(Ns, 10000000000000, 0, Part2).
