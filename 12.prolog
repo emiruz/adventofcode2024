@@ -1,4 +1,4 @@
-:- use_module(library(clpfd)).
+:- use_module([library(clpfd), library(yall)]).
 
 :- table coo/3, connect/2.
 

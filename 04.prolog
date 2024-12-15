@@ -1,3 +1,5 @@
+:- use_module(library(yall)).
+
 o2c(Xs, N, A-B, Os0, Cs) :-
     include({N,A,B}/[X-Y]>>(A+X>=0,A+X<N,Y+B>=0,Y+B<N), Os0, Os),
     maplist({Xs,N,A,B}/[X-Y,C]>>(I is (A+X)+(Y+B)*N, nth0(I,Xs,C)), Os, Cs).

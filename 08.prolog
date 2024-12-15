@@ -1,4 +1,4 @@
-:- use_module(library(clpfd)).
+:- use_module([library(clpfd), library(yall)]).
 
 coo(Cols, Idx, X-Y) :- X #= Idx // Cols, Y #= mod(Idx,Cols).
 

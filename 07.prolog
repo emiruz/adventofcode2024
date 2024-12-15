@@ -1,3 +1,5 @@
+:- use_module(library(yall)).
+
 test([X|Xs], Total0, Extra, Target) :-
     Target >= Total0,
     (  Total is Total0+X

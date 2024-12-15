@@ -1,4 +1,4 @@
-:- use_module(library(clpfd)).
+:- use_module([library(clpfd), library(yall)]).
 
 list_to_nums(X,Y) :- split_string(X,",","",Y0), maplist(atom_number,Y0,Y).
 

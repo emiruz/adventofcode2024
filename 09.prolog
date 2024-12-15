@@ -1,3 +1,5 @@
+:- use_module(library(yall)).
+
 add_idx(Xs, Ys) :- findall(I-X, nth1(I, Xs, X), Ys).
 
 expand(Xs0, Ys) :-
