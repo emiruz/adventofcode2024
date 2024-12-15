@@ -1,4 +1,4 @@
-:- use_module(library(clpfd)).
+:- use_module([library(clpfd), library(yall)]).
 
 optimise(X0-Y0, X1-Y1, X2-Y2, Offset, Tokens) :-    
     A #>= 0, B #>=0,
