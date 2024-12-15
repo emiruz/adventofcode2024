@@ -1,8 +1,8 @@
-:- use_module(library(yall)).
+f1(N,A,B,X-Y) :- A+X>=0,A+X<N,Y+B>=0,Y+B<N.
+f2(Xs,N,A,B,X-Y,C) :- I is (A+X)+(Y+B)*N, nth0(I,Xs,C).
 
 o2c(Xs, N, A-B, Os0, Cs) :-
-    include({N,A,B}/[X-Y]>>(A+X>=0,A+X<N,Y+B>=0,Y+B<N), Os0, Os),
-    maplist({Xs,N,A,B}/[X-Y,C]>>(I is (A+X)+(Y+B)*N, nth0(I,Xs,C)), Os, Cs).
+    include(f1(N,A,B), Os0, Os), maplist(f2(Xs,N,A,B), Os, Cs).
 
 xmas(Cs, N, X) :-
     member(Os, [[1-0,2-0,3-0], [-1-0,-2-0,-3-0], [1-(-1),2-(-2),3-(-3)], [0-(-1),0-(-2),0-(-3)],
