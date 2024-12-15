@@ -1,5 +1,3 @@
-:- use_module(library(yall)).
-
 add_idx(Xs, Ys) :- findall(I-X, nth1(I, Xs, X), Ys).
 
 expand(Xs0, Ys) :-
@@ -7,12 +5,15 @@ expand(Xs0, Ys) :-
     maplist([I0-X,L]>>(I is mod(I0,2)*(1+I0//2), length(L,X), maplist(=(I),L)), Xs, Xs2),
     flatten(Xs2, Xs3), maplist([A,B]>>(B is A-1), Xs3, Ys).
 
+f1(I-A,J-B,C) :- I<J->C=[J-A,I-B];C=[].
+f2(SwapDict, I-_) :- get_assoc(I, SwapDict, _).
+
 insert(Xs, Empty, Full, N, Ys) :-
     length(EmptyTrim, N), length(FullTrim, N),
     append(EmptyTrim, _, Empty), append(FullTrim, _, Full),
-    maplist([I-A,J-B,C]>>(I<J->C=[J-A,I-B];C=[]), EmptyTrim, FullTrim, Swap0),
+    maplist(f1, EmptyTrim, FullTrim, Swap0),
     flatten(Swap0, Swap), list_to_assoc(Swap, SwapDict),
-    exclude({SwapDict}/[I-_]>>(get_assoc(I, SwapDict, _)), Xs, Rem),
+    exclude(f2(SwapDict), Xs, Rem),
     append(Rem, Swap, Final), sort(Final, Ys).
 
 next_empty(_, N, Ys0, Ys) :- length(Ys0, N), reverse(Ys0, Ys), !.
@@ -37,7 +38,7 @@ solve(In, Part1, Part2) :-
     include([I-A]>>(A\=(-1)), ExpIdx, Full0), reverse(Full0, Full),
     length(Empty, N1), length(Full,N2), N is min(N1,N2),
     insert(ExpIdx, Empty, Full, N, Exp1),
-    aggregate_all(sum(I*M), (nth0(I,Exp1,_-M), M \= -1), Part1),
+    aggregate_all(sum(I2*M), (nth0(I2,Exp1,_-M), M \= -1), Part1),
     pairs_values(Full, Values0), sort(Values0,Values1), reverse(Values1,Values),
     insert2(Values, ExpIdx, Exp2),
     aggregate_all(sum(I*M), (nth0(I,Exp2,_-M), M \= -1), Part2).
