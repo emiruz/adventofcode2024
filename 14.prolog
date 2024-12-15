@@ -1,4 +1,4 @@
-:- use_module(library(clpfd)).
+:- use_module([library(clpfd), library(yall)]).
 
 safety_factor(Ns, Sec, Out) :-
     maplist({Sec}/[[Px,Py,Vx,Vy],X-Y]>>(X is mod(Px+Sec*Vx,101), Y is mod(Py+Sec*Vy,103)), Ns, Out).
