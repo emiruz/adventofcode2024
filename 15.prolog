@@ -19,7 +19,7 @@ move(M0,X,Y,M) :- (get_assoc(X,M0,'['), coo(X,X2,1-0), get_assoc(X2,M0,']');
 		  (get_assoc(Y2,M0,'.')->M1=M0;move(M0,Y2,X3,M1)),
 		  update(M1,X2,Y2,M2),
 		  (get_assoc(Y,M2,'.')->M3=M2;move(M2,Y,X1,M3)),
-		  !,  update(M3,X,Y,M).
+		  !, update(M3,X,Y,M).
 
 big_map([X0|Xs], Acc, Out) :-
     (X0='\n', X='\n'; X0='#', X=['#','#']; X0='O', X=['[',']'];
