@@ -25,15 +25,6 @@ find_nodes([X-Y|Xs0], Dict, Acc0, Final) :-
     find_nodes(Xs, Dict, [X-Y|Acc0], Final).
 find_nodes([], _, Final, Final).
 
-test(Start,Dir,Alt-N-D,Di0-H0,Di-H) :-
-    lookup0(Di0, dist-N-D, 1000000, Vdist),
-    (Vdist >= Alt
-    -> rb_insert(Di0, dist-N-D, Alt, Di1),
-       lookup0(Di0, prev-N-D, [], Vprev),
-       rb_insert(Di1, prev-N-D, [Start-Dir|Vprev], Di),
-       add_to_heap(H0, Alt, N-D, H)
-    ;  Di=Di0, H=H0).
-
 walk(Heap-Dict, End, Acc, Visited) :-
     min_of_heap(Heap, Acc, End-Dir),
     find_nodes([End-Dir], Dict, [], Pairs),
