@@ -52,9 +52,6 @@ walk(Heap0-Dict0, End, Cost, Visited) :-
 	      ;  Di=Di0, H=H0)
 	  ), More, Dict0-Heap1, Dict-Heap),
     !, walk(Heap-Dict, End, Cost, Visited).
-init_walk(Start-Dir, End, Cost, Visited) :-
-    singleton_heap(Heap, 0, Start-Dir), rb_empty(Dict),
-    walk(Heap-Dict, End, Cost, Visited).
 
 solve(In, Part1, Part2) :-
     read_file_to_string(In, S, []), string_chars(S,Cs0),
@@ -63,4 +60,5 @@ solve(In, Part1, Part2) :-
     retractall(cols(_,_)), asserta(cols(Cols)),
     retractall(p(_,_)), forall(member(I-V, Ids), asserta(p(I,V))),
     p(Start,'S'), p(End,'E'),
-    init_walk(Start-0, End, Part1, Part2).
+    singleton_heap(Heap, 0, Start-0), rb_empty(Dict),
+    walk(Heap-Dict, End, Part1, Part2).
