@@ -1,5 +1,4 @@
 :- use_module([library(yall)]).
-:- set_prolog_flag(stack_limit, 2_147_483_648).
 
 secret(Seed, Step3) :-
     Step1 is (Seed xor (Seed * 64)) mod 16777216,
@@ -12,7 +11,7 @@ lazy_diffs([A,B,C,D,E|T], [B,C,D,E|T], [I,J,K,L,X]) :-
     !, maplist([O-P,M]>>(M is O mod 10 - P mod 10), [B-A,C-B,D-C,E-D,E-0], [I,J,K,L,X]).
 
 tree(LazyDifs, Len, T) :-
-    length(Difs, Len), append(Difs, _, LazyDifs),
+    !, length(Difs, Len), append(Difs, _, LazyDifs),
     rb_empty(T0), foldl([[A,B,C,D,X],V0,V]>>(rb_insert_new(V0,[A,B,C,D],X,V),!;V=V0),Difs,T0,T).
 
 solve(In, Part1, Part2) :-
