@@ -42,7 +42,7 @@ having to chain predicates together using intermediary variables,
 when processing lists.
 
 I think perhaps the biggest benefit of using Prolog for these
-puzzles is as a an aide to tacitly understanding a different way
+puzzles is as an aide to tacitly understanding a different way
 of expressing computing: Prolog clauses are logical but always
 have a procedural interpretation which is "executed" through
 SLD/SLG resolution.
